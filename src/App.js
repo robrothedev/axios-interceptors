@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import PubSub from "pubsub-js";
+import Api from "./Api";
+import Error from "./Error";
+import Button from "./Button";
 
-function App() {
+const throwError = async () => Api.throwError();
+
+export default () => {
+  let [error, setError] = useState();
+
+  useEffect(() => {
+    PubSub.subscribe("API_ERROR", (msg, error) => setError(error));
+    return () => PubSub.unsubscribe("API_ERROR");
+  }, []);
+
+  let tryAgain = () => setError();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {error && <Error error={error} tryAgain={tryAgain} />}
+      {!error && <Button onClick={throwError}>Throw Error</Button>}
     </div>
   );
-}
-
-export default App;
+};
