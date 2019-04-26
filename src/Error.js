@@ -16,6 +16,7 @@ const styles = {
     height: "100vh"
   },
   img: {
+    border: "1px solid #333",
     borderRadius: 1000
   }
 };
@@ -34,7 +35,7 @@ const Error = ({ error, tryAgain }) => (
       <h1>{error.error.status}</h1>
       <h3>Message: {error.error.statusText}</h3>
       <h3>URL: {error.lastUrl}</h3>
-      <Button onClick={tryAgain}>Try Again</Button>
+      <Button onClick={tryAgain}>CLOSE</Button>
     </div>
   </Dialog>
 );

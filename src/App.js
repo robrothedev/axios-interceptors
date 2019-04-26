@@ -11,6 +11,7 @@ export default () => {
   let [error, setError] = useState();
 
   useEffect(() => {
+    // listen for an error and update the state to display the error
     PubSub.subscribe("API_ERROR", (msg, error) => setError(error));
     return () => PubSub.unsubscribe("API_ERROR");
   }, []);
@@ -20,8 +21,9 @@ export default () => {
 
   return (
     <div className="App">
-      {error && <Error error={error} tryAgain={tryAgain} />}
-      {!error && (
+      {error ? (
+        <Error error={error} tryAgain={tryAgain} />
+      ) : (
         <Button onClick={throwError}>Click Here to Throw Error</Button>
       )}
     </div>
