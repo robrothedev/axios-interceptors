@@ -6,6 +6,7 @@
 import axios from "axios";
 import PubSub from "pubsub-js";
 
+// base url for api requests
 const http = axios.create({
   baseURL: "https://5c93afb84dca5d0014ad82b1.mockapi.io/api/"
 });
@@ -16,6 +17,7 @@ let lastUrl;
 http.interceptors.request.use(
   // request successful
   function(config) {
+    // set the last url in the event of a response error
     lastUrl = config.url;
     return config;
   },

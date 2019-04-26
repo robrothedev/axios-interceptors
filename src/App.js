@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import PubSub from "pubsub-js";
-import Api from "./Api";
+import Http from "./Http";
 import Error from "./Error";
 import Button from "./Button";
 
-const throwError = async () => Api.throwError();
+// bad url on purpose do demonstrate interceptors
+const throwError = async () => await Http.get("/asdf");
 
 export default () => {
   let [error, setError] = useState();
@@ -14,12 +15,15 @@ export default () => {
     return () => PubSub.unsubscribe("API_ERROR");
   }, []);
 
+  // reset error state
   let tryAgain = () => setError();
 
   return (
     <div className="App">
       {error && <Error error={error} tryAgain={tryAgain} />}
-      {!error && <Button onClick={throwError}>Throw Error</Button>}
+      {!error && (
+        <Button onClick={throwError}>Click Here to Throw Error</Button>
+      )}
     </div>
   );
 };
