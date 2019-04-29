@@ -32,7 +32,7 @@ http.interceptors.response.use(
     return response;
   },
 
-  // response error so handle it
+  // response error so publish the error for subscribers to consume
   function(error) {
     PubSub.publish("API_ERROR", { error: error.response, lastUrl: lastUrl });
     return Promise.reject(error);
