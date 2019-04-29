@@ -1,13 +1,14 @@
 /**
  * Error.js
  *
- * Renders http response error
+ * Renders http response error using a MUI dialog
  */
 import React from "react";
 import PropTypes from "prop-types";
 import { Dialog, Slide } from "@material-ui/core";
 import Button from "./Button";
 
+// inline styles for the error dialog
 const styles = {
   error: {
     textAlign: "center",
@@ -41,7 +42,10 @@ const Error = ({ error, tryAgain }) => (
 );
 
 Error.propTypes = {
+  // error status and message
   error: PropTypes.object,
+
+  // closed the dialog
   tryAgain: PropTypes.func
 };
 

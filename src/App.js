@@ -4,10 +4,11 @@ import Http from "./Http";
 import Error from "./Error";
 import Button from "./Button";
 
-// bad url on purpose do demonstrate interceptors
+// bad url on purpose to demonstrate interceptors catching error response
 const throwError = async () => await Http.get("/asdf");
 
 export default () => {
+  // error state to toggle error dialog if applicable
   let [error, setError] = useState();
 
   useEffect(() => {

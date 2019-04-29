@@ -21,6 +21,8 @@ http.interceptors.request.use(
     lastUrl = config.url;
     return config;
   },
+
+  // request error
   function(error) {
     return Promise.reject(error);
   }

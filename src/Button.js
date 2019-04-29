@@ -1,7 +1,7 @@
 /**
  * Button.js
  *
- * Wrapper for mui button component
+ * Wrapper for MUI button component
  */
 import React from "react";
 import PropTypes from "prop-types";
@@ -15,6 +15,8 @@ const MUIButton = ({ children, onClick }) => (
 
 MUIButton.propTypes = {
   children: PropTypes.node,
+
+  // onClick event handler
   onClick: PropTypes.func
 };
 
