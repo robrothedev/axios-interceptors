@@ -21,6 +21,8 @@ http.interceptors.request.use(
     lastUrl = config.url;
     return config;
   },
+
+  // request error
   function(error) {
     return Promise.reject(error);
   }
@@ -32,7 +34,7 @@ http.interceptors.response.use(
     return response;
   },
 
-  // response error so handle it
+  // response error so publish the error for subscribers to consume
   function(error) {
     PubSub.publish("API_ERROR", { error: error.response, lastUrl: lastUrl });
     return Promise.reject(error);
